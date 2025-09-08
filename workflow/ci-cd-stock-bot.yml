@@ -1,0 +1,94 @@
+name: CI/CD Stock Bot
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # 1️⃣ Testes, Lint e Validação de YAML
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Detectar arquivos YAML no repositório
+        run: |
+          echo "📂 Arquivos YAML encontrados:"
+          find . -type f \( -name "*.yml" -o -name "*.yaml" \)
+
+      - name: Validar sintaxe dos YAMLs
+        run: |
+          pip install yamllint
+          yamllint .
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar lint
+        run: npm run lint
+
+      - name: Rodar testes
+        run: npm test
+
+  # 2️⃣ Deploy (só roda se os testes passarem e branch for main)
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build do projeto
+        run: npm run build
+
+      - name: Deploy para Railway
+        run: |
+          npm install -g @railway/cli
+          railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # 3️⃣ Notificação no Discord (sempre executa)
+  notify:
+    needs: [test, deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Enviar notificação para Discord (sucesso)
+        if: ${{ needs.deploy.result == 'success' }}
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🚀 **Stock Bot** - Deploy concluído com sucesso ✅
+            Commit: ${{ github.sha }}
+            Autor: ${{ github.actor }}
+
+      - name: Enviar notificação para Discord (falha)
+        if: ${{ needs.deploy.result != 'success' }}
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🚨 **Stock Bot** - Deploy falhou ❌
+            Commit: ${{ github.sha }}
+            Autor: ${{ github.actor }}
