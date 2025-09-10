@@ -1,0 +1,26 @@
+# PROVAVELMENTE PRECISAMOS INSTALAR O RAILWAY NO PROJETO TAMBÉM, CRIA UMA ISSUE PRA GENTE
+name: Build & Deploy
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: |
+          npm install -g @railway/cli
+          railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
