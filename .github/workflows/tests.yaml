@@ -1,0 +1,22 @@
+# PRECISAMOS INSTALAR O JEST PARA COLOCARMOS O JOB DE TESTES AUTOMATIZADOS
+name: Tests
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Detectar arquivos YAML no repositório
+        run: |
+          echo "📂 Arquivos YAML encontrados:"
+          find . -type f \( -name "*.yml" -o -name "*.yaml" \)

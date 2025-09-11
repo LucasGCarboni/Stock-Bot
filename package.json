@@ -6,7 +6,9 @@
   "scripts": {
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
-    "lint:eslint:check": "eslint . --ext .js"
+    "lint:eslint:check": "eslint . --ext .js",
+    "lint": "npm run lint:prettier:check && npm run lint:eslint:check",
+    "build": "echo \"No build step defined\""
   },
   "author": "",
   "license": "MIT",

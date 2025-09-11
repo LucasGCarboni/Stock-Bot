@@ -1,0 +1,30 @@
+name: Notify Discord
+on:
+  workflow_run:
+    workflows: ["Build & Deploy"]
+    types: [completed]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - name: Notify Success
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🚀 **Stock Bot** - Deploy concluído com sucesso ✅
+            Commit: ${{ github.sha }}
+            Autor: ${{ github.actor }}
+
+      - name: Notify Failure
+        if: ${{ github.event.workflow_run.conclusion != 'success' }}
+        uses: Ilshidur/action-discord@v2
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🚨 **Stock Bot** - Deploy falhou ❌
+            Commit: ${{ github.sha }}
+            Autor: ${{ github.actor }}
