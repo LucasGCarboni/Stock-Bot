@@ -4,6 +4,8 @@
   "description": "Uma API simples e automatizada que envia cotações de ações diretamente para um canal do Discord. Ideal para quem deseja acompanhar o mercado financeiro de forma prática e integrada.",
   "main": "index.js",
   "scripts": {
+    "dev": "node src/bot/index.js",
+    "register:commands": "node scripts/register-commands.js",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
     "lint:eslint:check": "eslint . --ext .js",
@@ -32,5 +34,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "dotenv": "^17.2.3"
   }
 }
