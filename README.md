@@ -12,6 +12,25 @@ Uma API simples e automatizada que envia cotações de ações diretamente para 
 - Deploy automatizado em ambiente cloud
 - Fácil expansão para alertas e histórico de preços
 
+# 🧠 Comandos do Bot
+
+Abaixo estão todos os comandos disponíveis atualmente no **Stock-Bot**, com suas descrições e exemplos.
+
+---
+
+## `/ping`
+
+Verifica se o bot está online e responde com **Pong!**  
+Útil para testar se o bot está funcionando corretamente.
+
+## `/botinfo`
+
+Mostra informações básicas sobre o bot, incluindo:
+
+- Nome do bot
+- ID
+- Data de criação
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
