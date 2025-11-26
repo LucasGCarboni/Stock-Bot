@@ -8,6 +8,8 @@
     "lint:prettier:fix": "prettier --write .",
     "lint:eslint:check": "eslint . --ext .js",
     "lint": "npm run lint:prettier:check && npm run lint:eslint:check",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watchAll --runInBand --verbose",
     "build": "echo \"No build step defined\"",
     "prepare": "husky",
     "commit": "cz"
