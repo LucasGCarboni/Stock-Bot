@@ -51,6 +51,20 @@ Mostra informações básicas sobre o bot, incluindo:
 - ID
 - Data de criação
 
+## `/quote <ticker>`
+
+O bot responde com:
+
+- Preço atual
+- Percentual de variação
+- Código da ação consultada
+
+## `/commands`
+
+Lista todos os comandos disponíveis no bot, com uma breve descrição de cada um.
+
+É útil para novos usuários entenderem rapidamente as funcionalidades do **Stock-Bot**.
+
 ---
 
 ## Tecnologias Utilizadas
