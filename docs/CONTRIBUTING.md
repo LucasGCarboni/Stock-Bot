@@ -43,10 +43,13 @@ Siga estas orientações para manter o projeto organizado e facilitar o trabalho
 
 - Sempre verifique se já não existe uma issue relacionada.
 - Escolha o template correto ao abrir uma nova issue:
-  - **Bug report** → erro ou comportamento inesperado
-  - **Feature request** → sugestão de nova funcionalidade
-  - **Task** → tarefas técnicas ou de infraestrutura
-  - **Blank issue** → caso não se encaixe em nenhum template
+  - **Bug report** → erro ou comportamento inesperado.
+  - **CI/CD** → pipelines, testes, GitHub Actions, workflows, automações.
+  - **Documentation** → criação de documentos no projeto.
+  - **Feature request** → sugestão de nova funcionalidade.
+  - **Refactoring** → novas melhorias e refatoração de código.
+  - **Task** → tarefas técnicas ou de infraestrutura.
+  - **Blank issue** → caso não se encaixe em nenhum template.
 - Preencha todos os campos obrigatórios do template.
 
 ---
