@@ -16,6 +16,14 @@ Sempre escolha o template que melhor descreve sua solicitação.
   Para reportar erros ou comportamentos inesperados.  
   Label padrão: `bug`.
 
+- **CI/CD (`ci.md`)**
+  Para mudanças relacionadas a pipelines, testes, GitHub Actions, workflows, automações, etc.
+  Label padrão: `CI/CD`.
+
+- **Documentation (`documentation.md`)**
+  Para melhorias, correções ou criação de documentos no projeto.
+  Label padrão: `documentation`.
+
 - **Feature Request (`feature_request.md`)**  
   Para sugerir novas funcionalidades.  
   Label padrão: `enhancement`.
