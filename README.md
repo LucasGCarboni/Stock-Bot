@@ -82,14 +82,17 @@ Lista todos os comandos disponíveis no bot, com uma breve descrição de cada u
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seu-usuario/stockbot-api.git
-cd stockbot-api
+git clone https://github.com/seu-usuario/Stock-Bot.git
+cd Stock-Bot
 
 # Instalar dependências
 npm install
 
+# Implementar comandos criados
+npm run register:commands
+
 # Executar localmente
-npm start
+npm run dev
 ```
 
 ## Documentação
