@@ -28,6 +28,10 @@ Sempre escolha o template que melhor descreve sua solicitação.
   Para sugerir novas funcionalidades.  
   Label padrão: `enhancement`.
 
+- **Refactoring (`refactor.md`)**  
+  Para sugerir novas melhorias internas no código sem alterar comportamento externo.  
+  Label padrão: `refactor`.
+
 - **Task (`task.md`)**  
   Para atividades técnicas ou não funcionais.  
   Label padrão: `task`.

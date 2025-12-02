@@ -1,5 +1,5 @@
 ---
-name: Documentação
+name: Documentation
 about: Melhorias, correções ou criação de documentos no projeto.
 title: "[DOC] Descreva a necessidade"
 labels: [documentation]
