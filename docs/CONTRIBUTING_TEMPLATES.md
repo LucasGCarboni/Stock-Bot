@@ -21,7 +21,7 @@ Sempre escolha o template que melhor descreve sua solicitação.
   Label padrão: `CI/CD`.
 
 - **Documentation (`documentation.md`)**
-  Para melhorias, correções ou criação de documentos no projeto.
+  Para criação de documentos no projeto.
   Label padrão: `documentation`.
 
 - **Feature Request (`feature_request.md`)**  
