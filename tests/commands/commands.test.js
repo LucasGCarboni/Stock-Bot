@@ -2,7 +2,7 @@ const commandsCommand = require("../../src/bot/commands/commands");
 const { EmbedBuilder } = require("discord.js");
 
 describe("Comando /commands", () => {
-  test("deve responder com um embed contendo a lista de comandos", async () => {
+  test("Should respond with an embed containing the list of commands.", async () => {
     const replyMock = jest.fn();
 
     const interactionMock = {

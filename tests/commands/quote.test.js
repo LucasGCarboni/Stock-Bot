@@ -10,14 +10,14 @@ beforeAll(() => {
 });
 
 describe("Stock Command", () => {
-  test("Deve ter nome e descrição corretos", () => {
+  test("Should have the correct name and description.", () => {
     expect(stockCommand.data.name).toBe("quote");
     expect(stockCommand.data.description).toBe(
       "Retorna cotação de uma ação B3.",
     );
   });
 
-  test("Deve retornar a cotação corretamente", async () => {
+  test("Should return the quote correctly.", async () => {
     marketService.getQuote.mockResolvedValue({
       symbol: "PETR4",
     });
@@ -38,7 +38,7 @@ describe("Stock Command", () => {
     });
   });
 
-  test("Deve retornar erro quando a API não encontra o ativo", async () => {
+  test("Should return an error when the API does not find the asset.", async () => {
     marketService.getQuote.mockResolvedValue(null);
 
     const interaction = {
@@ -56,7 +56,7 @@ describe("Stock Command", () => {
     });
   });
 
-  test("Deve tratar exceções internas", async () => {
+  test("Should handle internal exceptions.", async () => {
     marketService.getQuote.mockRejectedValue(new Error("Falha na API"));
 
     const interaction = {

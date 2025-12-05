@@ -1,13 +1,13 @@
 const botinfoCommand = require("../../src/bot/commands/botinfo.js");
 
 describe("Botinfo Command", () => {
-  test("Should have the correct description", () => {
+  test("Should have the correct description.", () => {
     expect(botinfoCommand.data.description).toBe(
       "Mostra informações básicas sobre o bot.",
     );
   });
 
-  test("Should reply with bot info", async () => {
+  test("Should reply with bot info.", async () => {
     const mockUser = {
       username: "Stock-Bot",
       id: "1234567890",
