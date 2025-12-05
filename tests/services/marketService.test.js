@@ -1,9 +1,7 @@
-// tests/services/marketService.test.js
-jest.mock("brapi"); // mock do módulo antes de tudo
+jest.mock("brapi");
 
 const Brapi = require("brapi");
 
-// Criamos aqui a instância que o service deve usar
 const mockRetrieve = jest.fn();
 
 Brapi.mockImplementation(() => ({
