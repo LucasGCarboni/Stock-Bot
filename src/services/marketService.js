@@ -7,7 +7,13 @@ const client = new Brapi({
 
 async function getQuote(ticker) {
   const response = await client.quote.retrieve(ticker);
-  return response.results[0];
+  const result = response.results?.[0];
+
+  if (!result) {
+    throw new Error(`No results found for ticker: ${ticker}`);
+  }
+
+  return result;
 }
 
 module.exports = { getQuote };
