@@ -16,4 +16,16 @@ async function getQuote(ticker) {
   return result;
 }
 
-module.exports = { getQuote };
+async function getFundamentals(ticker) {
+  const response = await client.quote.retrieve(ticker, {
+    modules: "summaryProfile",
+  });
+  const result = response?.results?.[0];
+
+  if (!result) {
+    throw new Error(`No results found for ticker: ${ticker}`);
+  }
+  return result;
+}
+
+module.exports = { getQuote, getFundamentals };

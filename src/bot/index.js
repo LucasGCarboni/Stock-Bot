@@ -4,7 +4,7 @@ const path = require("path");
 const { DISCORD_TOKEN } = require("../config/env");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
 const eventsPath = path.join(__dirname, "events");
