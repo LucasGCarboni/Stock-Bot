@@ -13,16 +13,16 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const ticker = interaction.options.getString("symbol").trim().toUpperCase();
+    const symbol = interaction.options.getString("symbol").trim().toUpperCase();
 
     await interaction.deferReply();
 
     try {
-      const quote = await getQuote(ticker);
+      const quote = await getQuote(symbol);
 
       if (!quote || quote.regularMarketPrice == null) {
         return interaction.editReply({
-          content: `Não foi possível encontrar cotação para o símbolo **${ticker}**.`,
+          content: `Não foi possível encontrar cotação para o símbolo **${symbol}**.`,
         });
       }
 
@@ -30,7 +30,7 @@ module.exports = {
       const change = quote.regularMarketChangePercent;
       const arrow = change >= 0 ? "🟢" : "🔴";
 
-      const replyMessage = `**${ticker}**
+      const replyMessage = `**${symbol}**
 Preço: R$ ${price.toFixed(2)}
 Variação: ${arrow} ${change.toFixed(2)}%`;
 
@@ -38,7 +38,7 @@ Variação: ${arrow} ${change.toFixed(2)}%`;
     } catch (err) {
       console.error("Erro ao buscar cotação:", err);
       await interaction.editReply({
-        content: `Ocorreu um erro ao buscar a cotação para **${ticker}**. Tente novamente mais tarde.`,
+        content: `Ocorreu um erro ao buscar a cotação para **${symbol}**. Tente novamente mais tarde.`,
       });
     }
   },
