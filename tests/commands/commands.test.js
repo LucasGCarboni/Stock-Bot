@@ -24,7 +24,7 @@ describe("Comando /commands", () => {
 
     const embedJson = embed.toJSON();
 
-    expect(embedJson.title).toBe("📘 Lista de Comandos");
+    expect(embedJson.title).toBe("Lista de Comandos");
 
     expect(embedJson.fields).toEqual(
       expect.arrayContaining([

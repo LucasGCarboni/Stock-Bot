@@ -70,7 +70,9 @@ describe("Stock Command", () => {
     await stockCommand.execute(interaction);
 
     expect(interaction.editReply).toHaveBeenCalledWith({
-      content: expect.stringContaining("Ocorreu um erro ao buscar a cotação"),
+      content: expect.stringContaining(
+        "⚠️ Não consegui buscar os dados. Verifique o ticker e tente novamente.",
+      ),
     });
   });
 });

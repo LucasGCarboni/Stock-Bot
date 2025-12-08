@@ -7,11 +7,11 @@ module.exports = {
 
   async execute(interaction) {
     const embed = new EmbedBuilder()
-      .setTitle("📘 Lista de Comandos")
+      .setTitle("Lista de Comandos")
       .setDescription(
         "Aqui estão todos os comandos disponíveis do **Stock-Bot**",
       )
-      .setColor("#0099ff")
+      .setColor("#cfdd39")
       .addFields(
         {
           name: "/ping",
@@ -26,6 +26,11 @@ module.exports = {
         {
           name: "/quote <ticker>",
           value: "Retorna cotação de uma ação B3.",
+          inline: false,
+        },
+        {
+          name: "/fundamentals <ticker>",
+          value: "Retorna indicadores fundamentalistas de uma ação B3.",
           inline: false,
         },
         {

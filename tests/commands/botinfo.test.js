@@ -22,6 +22,7 @@ describe("Botinfo Command", () => {
     await botinfoCommand.execute(interaction);
 
     expect(interaction.reply).toHaveBeenCalled();
-    expect(interaction.reply.mock.calls[0][0].content).toContain("Stock-Bot");
+    const reply = interaction.reply.mock.calls[0][0];
+    expect(reply.embeds[0].data.title).toContain("Informações do Stock-Bot");
   });
 });

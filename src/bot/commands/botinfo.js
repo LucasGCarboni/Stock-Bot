@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,12 +8,19 @@ module.exports = {
   async execute(interaction) {
     const botUser = interaction.client.user;
 
-    await interaction.reply({
-      content: `🤖 **Informações do Bot**
-• Nome: ${botUser.username}
-• ID: ${botUser.id}
-• Criado em: ${botUser.createdAt.toLocaleDateString("pt-BR")}
-`,
-    });
+    const embed = new EmbedBuilder()
+      .setTitle("Informações do Stock-Bot")
+      .setColor("#cfdd39")
+      .addFields(
+        { name: "Nome", value: botUser.username, inline: true },
+        { name: "ID", value: botUser.id, inline: true },
+        {
+          name: "Criado em",
+          value: botUser.createdAt.toLocaleDateString("pt-BR"),
+          inline: false,
+        },
+      );
+
+    await interaction.reply({ embeds: [embed] });
   },
 };

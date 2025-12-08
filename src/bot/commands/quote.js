@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { getQuote } = require("../../services/marketService.js");
 
 module.exports = {
@@ -13,32 +13,48 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const symbol = interaction.options.getString("symbol").trim().toUpperCase();
-
     await interaction.deferReply();
 
-    try {
-      const quote = await getQuote(symbol);
+    const symbol = interaction.options.getString("symbol").trim().toUpperCase();
 
-      if (!quote || quote.regularMarketPrice == null) {
+    try {
+      const ticker = await getQuote(symbol);
+
+      if (!ticker || ticker.regularMarketPrice == null) {
         return interaction.editReply({
-          content: `Não foi possível encontrar cotação para o símbolo **${symbol}**.`,
+          content: `⚠️ Não foi possível encontrar cotação para **${symbol}**.`,
         });
       }
 
-      const price = quote.regularMarketPrice;
-      const change = quote.regularMarketChangePercent;
-      const arrow = change >= 0 ? "🟢" : "🔴";
+      const price = ticker.regularMarketPrice;
+      const change = ticker.regularMarketChangePercent;
+      const changeArrow = change >= 0 ? "+" : "-";
+      const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 
-      const replyMessage = `**${symbol}**
-Preço: R$ ${price.toFixed(2)}
-Variação: ${arrow} ${change.toFixed(2)}%`;
+      const embed = new EmbedBuilder()
+        .setTitle(`${ticker.shortName || symbol} (${symbol})`)
+        .setColor(color)
+        .setThumbnail(ticker.logo || ticker.logourl || null)
+        .addFields(
+          {
+            name: "Preço",
+            value: `R$ ${price.toFixed(2)}`,
+            inline: true,
+          },
+          {
+            name: "Variação",
+            value: `${changeArrow} ${change.toFixed(2)}%`,
+            inline: true,
+          },
+        )
+        .setFooter({ text: "Fonte: BRAPI.dev" })
+        .setTimestamp(new Date(ticker.regularMarketTime));
 
-      await interaction.editReply({ content: replyMessage });
+      return interaction.editReply({ embeds: [embed] });
     } catch (err) {
       console.error("Erro ao buscar cotação:", err);
-      await interaction.editReply({
-        content: `Ocorreu um erro ao buscar a cotação para **${symbol}**. Tente novamente mais tarde.`,
+      return interaction.editReply({
+        content: `⚠️ Não consegui buscar os dados. Verifique o ticker e tente novamente.`,
       });
     }
   },
