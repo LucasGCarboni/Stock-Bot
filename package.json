@@ -1,6 +1,10 @@
 {
   "name": "pipeline-ci-cd-bolsa-de-valores",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
+  },
   "description": "Uma API simples e automatizada que envia cotações de ações diretamente para um canal do Discord. Ideal para quem deseja acompanhar o mercado financeiro de forma prática e integrada.",
   "main": "index.js",
   "scripts": {
