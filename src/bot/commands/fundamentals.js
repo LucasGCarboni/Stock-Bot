@@ -16,13 +16,14 @@ module.exports = {
 
     try {
       const ticker = await getFundamentals(symbol);
+      const change = ticker.regularMarketChangePercent;
+      const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 
       const embed = new EmbedBuilder()
         .setTitle(
           `${ticker.longName} (${symbol}) - Indicadores Fundamentalistas`,
         )
-        .setThumbnail(ticker.logo ?? ticker.logourl ?? null)
-        .setColor("#0099ff")
+        .setColor(color)
         .addFields(
           {
             name: "Preço",
