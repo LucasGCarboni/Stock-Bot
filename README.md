@@ -59,6 +59,17 @@ O bot responde com:
 - Percentual de variação
 - Código da ação consultada
 
+## `/fundamentals <ticker>`
+
+O bot responde com indicadores fundamentalistas, sendo:
+
+- Preço atual
+- Preço sob lucro (P/L)
+- Setor
+- Resumo sobre a empresa
+- Número de funcionários
+- Site da empresa
+
 ## `/commands`
 
 Lista todos os comandos disponíveis no bot, com uma breve descrição de cada um.
