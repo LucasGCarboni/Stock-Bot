@@ -26,6 +26,11 @@ module.exports = {
           value: botUser.createdAt.toLocaleDateString("pt-BR"),
           inline: true,
         },
+        {
+          name: "Repositório",
+          value: "https://github.com/LucasGCarboni/Stock-Bot",
+          inline: false,
+        },
       );
     if (bannerURL) {
       embed.setImage(bannerURL);
