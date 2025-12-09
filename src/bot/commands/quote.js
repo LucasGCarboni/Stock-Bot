@@ -7,7 +7,7 @@ module.exports = {
     .setDescription("Retorna cotação de uma ação B3.")
     .addStringOption((option) =>
       option
-        .setName("symbol")
+        .setName("ticker")
         .setDescription("Símbolo da ação (ex: PETR4)")
         .setRequired(true),
     ),
@@ -15,7 +15,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
 
-    const symbol = interaction.options.getString("symbol").trim().toUpperCase();
+    const symbol = interaction.options.getString("ticker").trim().toUpperCase();
 
     try {
       const ticker = await getQuote(symbol);
@@ -47,7 +47,6 @@ module.exports = {
             inline: true,
           },
         )
-        .setFooter({ text: "Fonte: BRAPI.dev" })
         .setTimestamp(new Date(ticker.regularMarketTime));
 
       return interaction.editReply({ embeds: [embed] });

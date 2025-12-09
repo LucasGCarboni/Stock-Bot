@@ -59,7 +59,7 @@ O bot responde com:
 - Percentual de variação
 - Código da ação consultada
 
-## `/fundamentals <ticker>`
+## `/summary <ticker>`
 
 O bot responde com indicadores fundamentalistas, sendo:
 

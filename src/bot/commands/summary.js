@@ -1,28 +1,26 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { getFundamentals } = require("../../services/marketService");
+const { getSummary } = require("../../services/marketService");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("fundamentals")
+    .setName("summary")
     .setDescription("Mostra indicadores fundamentalistas completos de uma ação")
     .addStringOption((option) =>
-      option.setName("symbol").setDescription("Ex: PETR4").setRequired(true),
+      option.setName("ticker").setDescription("Ex: PETR4").setRequired(true),
     ),
 
   async execute(interaction) {
     await interaction.deferReply();
 
-    const symbol = interaction.options.getString("symbol").trim().toUpperCase();
+    const symbol = interaction.options.getString("ticker").trim().toUpperCase();
 
     try {
-      const ticker = await getFundamentals(symbol);
+      const ticker = await getSummary(symbol);
       const change = ticker.regularMarketChangePercent;
       const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 
       const embed = new EmbedBuilder()
-        .setTitle(
-          `${ticker.longName} (${symbol}) - Indicadores Fundamentalistas`,
-        )
+        .setTitle(`${ticker.longName} (${symbol})`)
         .setColor(color)
         .addFields(
           {
@@ -67,8 +65,7 @@ module.exports = {
             value: ticker.summaryProfile?.website || "–",
             inline: false,
           },
-        )
-        .setFooter({ text: "Fonte: BRAPI.dev" });
+        );
 
       return interaction.editReply({ embeds: [embed] });
     } catch (err) {
