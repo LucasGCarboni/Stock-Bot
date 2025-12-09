@@ -6,13 +6,13 @@ module.exports = {
     .setName("summary")
     .setDescription("Mostra indicadores fundamentalistas completos de uma ação")
     .addStringOption((option) =>
-      option.setName("symbol").setDescription("Ex: PETR4").setRequired(true),
+      option.setName("ticker").setDescription("Ex: PETR4").setRequired(true),
     ),
 
   async execute(interaction) {
     await interaction.deferReply();
 
-    const symbol = interaction.options.getString("symbol").trim().toUpperCase();
+    const symbol = interaction.options.getString("ticker").trim().toUpperCase();
 
     try {
       const ticker = await getSummary(symbol);
