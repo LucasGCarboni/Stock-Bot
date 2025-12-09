@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { getFundamentals } = require("../../services/marketService");
+const { getSummary } = require("../../services/marketService");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("fundamentals")
+    .setName("summary")
     .setDescription("Mostra indicadores fundamentalistas completos de uma ação")
     .addStringOption((option) =>
       option.setName("symbol").setDescription("Ex: PETR4").setRequired(true),
@@ -15,7 +15,7 @@ module.exports = {
     const symbol = interaction.options.getString("symbol").trim().toUpperCase();
 
     try {
-      const ticker = await getFundamentals(symbol);
+      const ticker = await getSummary(symbol);
       const change = ticker.regularMarketChangePercent;
       const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 

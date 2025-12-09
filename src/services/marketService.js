@@ -16,7 +16,7 @@ async function getQuote(ticker) {
   return result;
 }
 
-async function getFundamentals(ticker) {
+async function getSummary(ticker) {
   const response = await client.quote.retrieve(ticker, {
     modules: "summaryProfile",
   });
@@ -28,4 +28,4 @@ async function getFundamentals(ticker) {
   return result;
 }
 
-module.exports = { getQuote, getFundamentals };
+module.exports = { getQuote, getSummary };

@@ -1,14 +1,13 @@
+// Corrige o caminho do mock
 jest.mock("../../src/services/marketService.js", () => ({
-  getFundamentals: jest.fn(),
+  getSummary: jest.fn(), // Mudou de getFundamentals para getSummary
 }));
 
 jest.mock("discord.js", () => ({
   SlashCommandBuilder: jest.fn().mockImplementation(() => ({
-    setName: () => ({
-      setDescription: () => ({
-        addStringOption: () => ({}),
-      }),
-    }),
+    setName: jest.fn().mockReturnThis(),
+    setDescription: jest.fn().mockReturnThis(),
+    addStringOption: jest.fn().mockReturnThis(),
   })),
   EmbedBuilder: jest.fn().mockImplementation(() => ({
     setTitle: jest.fn().mockReturnThis(),
@@ -19,10 +18,12 @@ jest.mock("discord.js", () => ({
   })),
 }));
 
-const fundamentalsCommand = require("../../src/bot/commands/fundamentals.js");
-const { getFundamentals } = require("../../src/services/marketService.js");
+// Atualiza o caminho do comando
+const summaryCommand = require("../../src/bot/commands/summary.js");
+const { getSummary } = require("../../src/services/marketService.js");
 
-describe("Fundamentals Command", () => {
+describe("Summary Command", () => {
+  // Mudou o nome do describe
   let interaction;
 
   beforeEach(() => {
@@ -36,8 +37,8 @@ describe("Fundamentals Command", () => {
     jest.clearAllMocks();
   });
 
-  test("Should reply with an embed when fundamentals data is valid", async () => {
-    getFundamentals.mockResolvedValue({
+  test("Should reply with an embed when summary data is valid", async () => {
+    getSummary.mockResolvedValue({
       longName: "Petrobras PN",
       regularMarketPrice: 38.5,
       regularMarketChangePercent: 1.23,
@@ -52,8 +53,9 @@ describe("Fundamentals Command", () => {
       logo: "https://icons.brapi.dev/logos/PETR4.png",
     });
 
-    await fundamentalsCommand.execute(interaction);
+    await summaryCommand.execute(interaction);
 
+    expect(interaction.deferReply).toHaveBeenCalled();
     expect(interaction.editReply).toHaveBeenCalledWith(
       expect.objectContaining({
         embeds: expect.any(Array),
@@ -62,23 +64,25 @@ describe("Fundamentals Command", () => {
   });
 
   test("Should warn the user when price is missing", async () => {
-    getFundamentals.mockResolvedValue({
+    getSummary.mockResolvedValue({
       longName: "Test Company",
       regularMarketPrice: null,
     });
 
-    await fundamentalsCommand.execute(interaction);
+    await summaryCommand.execute(interaction);
 
+    expect(interaction.deferReply).toHaveBeenCalled();
     expect(interaction.editReply).toHaveBeenCalled();
   });
 
   test("Should handle API errors gracefully", async () => {
     const logSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-    getFundamentals.mockRejectedValue(new Error("API Error"));
+    getSummary.mockRejectedValue(new Error("API Error"));
 
-    await fundamentalsCommand.execute(interaction);
+    await summaryCommand.execute(interaction);
 
+    expect(interaction.deferReply).toHaveBeenCalled();
     expect(interaction.editReply).toHaveBeenCalledWith(
       expect.stringContaining("⚠️ Não consegui buscar os dados"),
     );
