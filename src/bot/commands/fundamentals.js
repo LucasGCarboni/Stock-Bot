@@ -67,8 +67,7 @@ module.exports = {
             value: ticker.summaryProfile?.website || "–",
             inline: false,
           },
-        )
-        .setFooter({ text: "Fonte: BRAPI.dev" });
+        );
 
       return interaction.editReply({ embeds: [embed] });
     } catch (err) {

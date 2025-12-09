@@ -47,7 +47,6 @@ module.exports = {
             inline: true,
           },
         )
-        .setFooter({ text: "Fonte: BRAPI.dev" })
         .setTimestamp(new Date(ticker.regularMarketTime));
 
       return interaction.editReply({ embeds: [embed] });
