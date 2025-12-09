@@ -20,9 +20,7 @@ module.exports = {
       const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 
       const embed = new EmbedBuilder()
-        .setTitle(
-          `${ticker.longName} (${symbol}) - Indicadores Fundamentalistas`,
-        )
+        .setTitle(`${ticker.longName} (${symbol})`)
         .setColor(color)
         .addFields(
           {
