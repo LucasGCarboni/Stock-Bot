@@ -29,8 +29,8 @@ module.exports = {
           inline: false,
         },
         {
-          name: "/fundamentals <ticker>",
-          value: "Retorna indicadores fundamentalistas de uma ação B3.",
+          name: "/summary <ticker>",
+          value: "Retorna um resumo de uma ação B3.",
           inline: false,
         },
         {
