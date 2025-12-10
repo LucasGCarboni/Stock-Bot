@@ -31,6 +31,7 @@ describe("Comando /commands", () => {
         expect.objectContaining({ name: "/ping" }),
         expect.objectContaining({ name: "/botinfo" }),
         expect.objectContaining({ name: "/quote <ticker>" }),
+        expect.objectContaining({ name: "/summary <ticker>" }),
         expect.objectContaining({ name: "/commands" }),
       ]),
     );
