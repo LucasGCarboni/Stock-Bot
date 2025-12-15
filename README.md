@@ -12,7 +12,6 @@
   <img src="https://img.shields.io/badge/Discord.js-5865F2?style=for-the-badge&logo=discord&logoColor=white"/>
   <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white"/>
   <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/>
   
 </p>
 
@@ -84,8 +83,6 @@ Lista todos os comandos disponíveis no bot, com uma breve descrição de cada u
 - JavaScript
 - GitHub Actions (CI/CD)
 - Discord.js
-- Railway ou Render (deploy)
-- Axios (requisições HTTP)
 
 ---
 
