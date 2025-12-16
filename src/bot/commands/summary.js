@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { getSummary } = require("../../services/marketService");
+const logoService = require("../../services/logoService.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,6 +18,8 @@ module.exports = {
     try {
       const ticker = await getSummary(symbol);
       const change = ticker.regularMarketChangePercent;
+
+      const logoUrl = await logoService.resolveLogo(ticker);
       const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 
       const embed = new EmbedBuilder()
@@ -66,6 +69,7 @@ module.exports = {
             inline: false,
           },
         );
+      if (logoUrl) embed.setThumbnail(logoUrl);
 
       return interaction.editReply({ embeds: [embed] });
     } catch (err) {
