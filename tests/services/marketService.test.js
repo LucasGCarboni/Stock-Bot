@@ -1,6 +1,10 @@
-jest.mock("brapi");
+jest.mock("brapi", () => {
+  return {
+    Brapi: jest.fn(),
+  };
+});
 
-const Brapi = require("brapi");
+const { Brapi } = require("brapi");
 
 const mockRetrieve = jest.fn();
 

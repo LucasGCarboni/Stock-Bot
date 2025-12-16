@@ -1,5 +1,5 @@
-const Brapi = require("brapi");
-const { BRAPI_API_KEY } = require("../config/env");
+const { Brapi } = require("brapi");
+const { BRAPI_API_KEY } = require("../config/env.js");
 
 const client = new Brapi({
   apiKey: BRAPI_API_KEY,

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { getQuote } = require("../../services/marketService.js");
+const logoService = require("../../services/logoService.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,13 +29,13 @@ module.exports = {
 
       const price = ticker.regularMarketPrice;
       const change = ticker.regularMarketChangePercent;
-      const changeArrow = change >= 0 ? "+" : "-";
+      const logoUrl = await logoService.resolveLogo(ticker);
+      const changeArrow = change >= 0 ? "▲" : "▼";
       const color = change >= 0 ? 0x00c853 : 0xd32f2f;
 
       const embed = new EmbedBuilder()
         .setTitle(`${ticker.shortName || symbol} (${symbol})`)
         .setColor(color)
-        .setThumbnail(ticker.logo || ticker.logourl || null)
         .addFields(
           {
             name: "Preço",
@@ -48,6 +49,8 @@ module.exports = {
           },
         )
         .setTimestamp(new Date(ticker.regularMarketTime));
+
+      if (logoUrl) embed.setThumbnail(logoUrl);
 
       return interaction.editReply({ embeds: [embed] });
     } catch (err) {
